@@ -4,7 +4,6 @@ import com.genius.serializer.JavaSerializer;
 import com.genius.serializer.KryoSerializer;
 import com.genius.serializer.Serializer;
 import com.genius.serializer.model.Employee;
-import com.genius.serializer.model.SerializationConstants;
 
 public class SerializerDemo {
 
@@ -14,7 +13,7 @@ public class SerializerDemo {
   }
 
   public void executeDemo() {
-    Employee employeeToSerialize = this.prepareObject();
+    Employee employeeToSerialize = Employee.prepareSampleObject();
 
     System.out.println("Employee To Serialize-");
     System.out.println(employeeToSerialize);
@@ -36,12 +35,4 @@ public class SerializerDemo {
     System.out.println();
   }
 
-  private Employee prepareObject() {
-    Employee employee = new Employee();
-    employee.setName(SerializationConstants.NAME);
-    employee.setAddress(SerializationConstants.ADDRESS);
-    employee.setSSN(SerializationConstants.SSN);
-    employee.setNumber(SerializationConstants.NUMBER);
-    return employee;
-  }
 }

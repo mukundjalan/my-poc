@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata"
+	xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:kryo="http://www.mulesoft.org/schema/mule/kryo" xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/kryo http://www.mulesoft.org/schema/mule/ee/kryo/3.7/mule-kryo.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
+
+	<!-- Uncomment this to get desired payload -->
+	<!-- <kryo:serializer name="kryo" />
+	<configuration defaultObjectSerializer-ref="kryo" /> -->
+
+	<http:listener-config name="HTTP_Listener_Configuration"
+		host="0.0.0.0" port="8192" basePath="serialize-demo" doc:name="HTTP Listener Configuration" />
+	<vm:connector name="SER_VM" validateConnections="true"
+		doc:name="VM">
+		<vm:queue-profile>
+			<default-persistent-queue-store />
+		</vm:queue-profile>
+	</vm:connector>
+
+	<flow name="initiation-flow">
+		<http:listener config-ref="HTTP_Listener_Configuration"
+			path="/exec" doc:name="HTTP" />
+		<component class="com.genius.serializer.mule.SerializerDemoComponent"
+			doc:name="Java" />
+		<vm:outbound-endpoint exchange-pattern="one-way"
+			path="com.ser.vm1" connector-ref="SER_VM"
+			disableTransportTransformer="true" doc:name="VM" />
+		<json:object-to-json-transformer name="JSON_Transformer"
+			sourceClass="com.genius.serializer.model.Employee" doc:name="Object to JSON" />
+	</flow>
+
+	<flow name="vm-flow">
+		<vm:inbound-endpoint exchange-pattern="one-way"
+			path="com.ser.vm1" name="SER_VM_RECV_EP" doc:name="VM" connector-ref="SER_VM" />
+		<logger doc:name="Logger" level="INFO" message="Received Payload - #[payload]" />
+	</flow>
+</mule>

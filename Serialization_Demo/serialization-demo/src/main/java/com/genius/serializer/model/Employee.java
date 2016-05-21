@@ -40,4 +40,13 @@ public class Employee extends Person implements Serializable {
         + ", number=" + number + "]";
   }
 
+  public static Employee prepareSampleObject() {
+    Employee employee = new Employee();
+    employee.setName(SerializationConstants.NAME);
+    employee.setAddress(SerializationConstants.ADDRESS);
+    employee.setSSN(SerializationConstants.SSN);
+    employee.setNumber(SerializationConstants.NUMBER);
+    return employee;
+  }
+
 }

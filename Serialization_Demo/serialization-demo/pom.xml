@@ -8,6 +8,7 @@
 
 	<properties>
 		<jdk.version>1.7</jdk.version>
+		<kryo.version>3.0.1</kryo.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -29,7 +30,7 @@
 		<dependency>
 			<groupId>com.esotericsoftware</groupId>
 			<artifactId>kryo</artifactId>
-			<version>3.0.3</version>
+			<version>${kryo.version}</version>
 		</dependency>
 	</dependencies>
 

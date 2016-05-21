@@ -1,0 +1,2 @@
+https://docs.mulesoft.com/mule-user-guide/v/3.7/improving-performance-with-the-kryo-serializer
+
