@@ -17,7 +17,8 @@ public class KryoSerializer implements Serializer {
     kryo = new Kryo();
   }
 
-  public void serialize(Object objectToSerialize) {
+  @Override
+  public <T> void serialize(T objectToSerialize) {
     try (FileOutputStream fileOut = new FileOutputStream(SerializationConstants.FILE_PATH);
         Output output = new Output(fileOut);) {
       kryo.writeObject(output, objectToSerialize);
@@ -27,7 +28,8 @@ public class KryoSerializer implements Serializer {
     }
   }
 
-  public <T> T deSerialize(Class<T> clazz) {
+  @Override
+  public <T, U extends T> T deSerialize(Class<U> clazz) {
     try (FileInputStream fileIn = new FileInputStream(SerializationConstants.FILE_PATH);
         Input input = new Input(fileIn);) {
       return kryo.readObject(input, clazz);

@@ -2,8 +2,8 @@ package com.genius.serializer;
 
 public interface Serializer {
 
-  public void serialize(Object objectToSerialize);
+  public <T> void serialize(T objectToSerialize);
 
-  public <T> T deSerialize(Class<T> clazz);
+  public <T, U extends T> T deSerialize(Class<U> clazz);
 
 }

@@ -16,4 +16,10 @@ public class Person {
     return "Person [name=" + name + "]";
   }
 
+  public static Person prepareSampleObject() {
+    Person person = new Person();
+    person.setName(SerializationConstants.NAME);
+    return person;
+  }
+
 }

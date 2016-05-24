@@ -1,7 +1,7 @@
 package com.genius.serializer.model;
 
 public class SerializationConstants {
-  public static final String FILE_PATH = "G:/Technicals/employee.ser";
+  public static final String FILE_PATH = "employee.ser";
 
   public static final String NAME = "John Smith";
   

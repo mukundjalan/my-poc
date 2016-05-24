@@ -10,7 +10,8 @@ import com.genius.serializer.model.SerializationConstants;
 
 public class JavaSerializer implements Serializer {
 
-  public void serialize(Object objectToSerialize) {
+  @Override
+  public <T> void serialize(T objectToSerialize) {
     try (FileOutputStream fileOut = new FileOutputStream(SerializationConstants.FILE_PATH);
         ObjectOutputStream out = new ObjectOutputStream(fileOut);) {
       out.writeObject(objectToSerialize);
@@ -21,7 +22,8 @@ public class JavaSerializer implements Serializer {
   }
 
   @SuppressWarnings("unchecked")
-  public <T> T deSerialize(Class<T> clazz) {
+  @Override
+  public <T, U extends T> T deSerialize(Class<U> clazz) {
     try (FileInputStream fileIn = new FileInputStream(SerializationConstants.FILE_PATH);
         ObjectInputStream in = new ObjectInputStream(fileIn);) {
       return (T) in.readObject();
