@@ -5,6 +5,7 @@ import org.mule.api.MuleMessage;
 import org.mule.api.lifecycle.Callable;
 
 import com.genius.serializer.model.Employee;
+import com.genius.serializer.model.GeneralizedEmployee;
 
 public class SerializerDemoComponent implements Callable {
 
@@ -12,7 +13,7 @@ public class SerializerDemoComponent implements Callable {
   public Object onCall(MuleEventContext eventContext) throws Exception {
     MuleMessage muleMessage = eventContext.getMessage();
     
-    Employee employee = Employee.prepareSampleObject();
+    Employee employee = GeneralizedEmployee.prepareSampleObject();
     muleMessage.setPayload(employee);
     
     return muleMessage;
