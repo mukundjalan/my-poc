@@ -7,9 +7,12 @@
 	<name>Serialization Demo</name>
 
 	<properties>
-		<jdk.version>1.7</jdk.version>
-		<kryo.version>3.0.1</kryo.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>1.7</jdk.version>
+		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+		<kryo.version>3.0.1</kryo.version>
+		<jackson.version>2.7.4</jackson.version>
+		<yamlbeans.version>1.08</yamlbeans.version>
 	</properties>
 
 	<build>
@@ -17,7 +20,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
@@ -31,6 +34,16 @@
 			<groupId>com.esotericsoftware</groupId>
 			<artifactId>kryo</artifactId>
 			<version>${kryo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esotericsoftware.yamlbeans</groupId>
+			<artifactId>yamlbeans</artifactId>
+			<version>${yamlbeans.version}</version>
 		</dependency>
 	</dependencies>
 

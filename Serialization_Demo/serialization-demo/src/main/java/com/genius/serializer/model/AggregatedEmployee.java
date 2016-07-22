@@ -44,7 +44,7 @@ public class AggregatedEmployee implements Employee {
 
   @Override
   public String toString() {
-    return "AggregatedEmployee [Inherited=" + super.toString() + ", person=" + person + ", address=" + address + ", SSN=" + SSN
+    return "AggregatedEmployee [person=" + person + ", address=" + address + ", SSN=" + SSN
         + ", number=" + number + "]";
   }
 

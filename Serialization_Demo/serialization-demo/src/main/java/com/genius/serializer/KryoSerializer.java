@@ -2,7 +2,6 @@ package com.genius.serializer;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
@@ -22,7 +21,7 @@ public class KryoSerializer implements Serializer {
     try (FileOutputStream fileOut = new FileOutputStream(SerializationConstants.FILE_PATH);
         Output output = new Output(fileOut);) {
       kryo.writeObject(output, objectToSerialize);
-    } catch (IOException e) {
+    } catch (Exception e) {
       e.printStackTrace();
       throw new RuntimeException(e);
     }
@@ -33,7 +32,7 @@ public class KryoSerializer implements Serializer {
     try (FileInputStream fileIn = new FileInputStream(SerializationConstants.FILE_PATH);
         Input input = new Input(fileIn);) {
       return kryo.readObject(input, clazz);
-    } catch (IOException e) {
+    } catch (Exception e) {
       e.printStackTrace();
       throw new RuntimeException(e);
     }
